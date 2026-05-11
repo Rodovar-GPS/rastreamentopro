@@ -20,7 +20,7 @@ export interface Driver {
 
 export interface Shipment {
   id: string;
-  tracking_code: string; // e.g. ROD-2025-0001
+  tracking_code: string; // e.g. rodo-10001
   status: ShipmentStatus;
   customer_name: string;
   customer_document: string;

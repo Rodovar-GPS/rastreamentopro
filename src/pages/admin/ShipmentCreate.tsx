@@ -11,7 +11,7 @@ export function ShipmentCreate() {
   const [drivers, setDrivers] = useState<Driver[]>([]);
   
   const [formData, setFormData] = useState({
-    tracking_code: `ROD-${new Date().getFullYear()}-${Math.floor(Math.random() * 10000).toString().padStart(4, '0')}`,
+    tracking_code: 'rodo-Auto',
     customer_name: '',
     customer_document: '',
     origin: '',
@@ -39,8 +39,7 @@ export function ShipmentCreate() {
     e.preventDefault();
     setLoading(true);
 
-    const { error } = await supabase.from('shipments').insert([{
-      tracking_code: formData.tracking_code,
+    const shipmentData: any = {
       status: 'pendente',
       customer_name: formData.customer_name,
       customer_document: formData.customer_document,
@@ -52,7 +51,14 @@ export function ShipmentCreate() {
       driver_percentage: parseFloat(formData.driver_percentage) || 0,
       driver_id: formData.driver_id || null,
       expected_delivery_date: formData.expected_delivery_date
-    }]);
+    };
+
+    // Only include tracking_code if it's not the automatic placeholder
+    if (formData.tracking_code !== 'rodo-Auto' && formData.tracking_code.trim() !== '') {
+      shipmentData.tracking_code = formData.tracking_code;
+    }
+
+    const { error } = await supabase.from('shipments').insert([shipmentData]);
 
     setLoading(false);
     if (!error) {
