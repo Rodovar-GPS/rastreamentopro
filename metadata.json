@@ -1,0 +1,8 @@
+{
+  "name": "RODOVAR Tracking",
+  "description": "Sistema de rastreamento de cargas para a empresa RODOVAR",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": []
+}
