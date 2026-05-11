@@ -65,6 +65,9 @@ BEGIN
 END;
 $$ language 'plpgsql';
 
+-- Corrigindo o erro de "trigger already exists"
+DROP TRIGGER IF EXISTS update_shipments_updated_at ON public.shipments;
+
 CREATE TRIGGER update_shipments_updated_at
     BEFORE UPDATE ON public.shipments
     FOR EACH ROW
